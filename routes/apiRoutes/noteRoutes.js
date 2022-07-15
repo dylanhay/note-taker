@@ -9,7 +9,7 @@ const {
 const { notes } = require("../../db/db");
 
 
-router.get("/db", (req, res) => {
+router.get("/notes", (req, res) => {
   let results = notes;
   if (req.query) {
     results = filterByQuery(req.query, results);
@@ -17,7 +17,7 @@ router.get("/db", (req, res) => {
   res.json(results);
 });
 
-router.get("/db/:id", (req, res) => {
+router.get("/notes/:id", (req, res) => {
   const result = findById(req.params.id, notes);
   if (result) {
     res.json(result);
@@ -26,7 +26,7 @@ router.get("/db/:id", (req, res) => {
   }
 });
 
-router.post("/db", (req, res) => {
+router.post("/notes", (req, res) => {
   // set id based on what the next index of the array will be
   req.body.id = notes.length.toString();
 

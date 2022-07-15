@@ -1,10 +1,12 @@
+const $noteForm = document.querySelector('#note-form');
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname === '/notes.html') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
@@ -173,11 +175,44 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
+
+const handleNoteFormSubmit = event => {
+  event.preventDefault();
+
+  // get note data and organize it
+  const title = $noteForm.querySelector('[name="note-title"]').value;
+  const text = $noteForm.querySelector('[name="note-text"]').value;
+
+  const noteObj = { title, text };
+  console.log(noteObj);
+  fetch('api/notes', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(noteObj)
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      alert('Error: ' + response.statusText);
+    })
+    .then(postResponse => {
+      console.log(postResponse);
+      alert('Thank you for adding a note!');
+    });
+};
+
+
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
+
+$noteForm.addEventListener('submit', handleNoteFormSubmit);
 
 getAndRenderNotes();
