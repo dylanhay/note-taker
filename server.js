@@ -13,6 +13,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+//make public folder files available to server
+app.use(express.static('public'));
 
 //may not be needed
 function filterByQuery(query, notesArray) {
@@ -79,6 +81,10 @@ app.post('/api/notes', (req, res) => {
     const note = createNewNote(req.body, notes);
     res.json(note);
   }
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.listen(PORT, () => {
