@@ -1,10 +1,10 @@
+//server requirements
 const { notes } = require('./data/notes');
-
 const fs = require('fs');
 const path = require('path');
-
 const express = require('express');
 
+//port declaration
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -16,7 +16,8 @@ app.use(express.json());
 //make public folder files available to server
 app.use(express.static('public'));
 
-//may not be needed
+//note functions
+
 function filterByQuery(query, notesArray) {
   let filteredResults = notesArray;
   if (query.title) {
@@ -43,17 +44,6 @@ function createNewNote(body, notesArray) {
   return note;
 }
 
-// function deleteNote(id, notesArray) {
-//   const remove = notesArray.filter(note => note.id === id);
-//   const result = notesArray.filter(note => note.id !== id);
-//   console.log(result);
-//   fs.writeFileSync(
-//     path.join(__dirname, './data/notes.json'),
-//     JSON.stringify({ notes: result }, null, 2)
-//   );
-//   return remove;
-// }
-
 function deleteNote(id, notesArray) {
   notesArray.splice(id, 1);
   fs.writeFileSync(
@@ -73,6 +63,8 @@ function validateNote(note) {
   return true;
 }
 
+//api routes
+
 app.get('/api/notes', (req, res) => {
   let results = notes;
   if (req.query) {
@@ -91,10 +83,8 @@ app.get('/api/notes/:id', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-  // set id based on what the next index of the array will be
   req.body.id = notes.length.toString();
 
-  // if any data in req.body is incorrect, send 400 error back
   if (!validateNote(req.body)) {
     res.status(400).send('The note is not properly formatted.');
   } else {
@@ -111,6 +101,8 @@ app.delete('/api/notes/:id', (req, res) => {
     res.send(404);
   }
 });
+
+//html routes
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
