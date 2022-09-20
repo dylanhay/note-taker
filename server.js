@@ -43,6 +43,26 @@ function createNewNote(body, notesArray) {
   return note;
 }
 
+// function deleteNote(id, notesArray) {
+//   const remove = notesArray.filter(note => note.id === id);
+//   const result = notesArray.filter(note => note.id !== id);
+//   console.log(result);
+//   fs.writeFileSync(
+//     path.join(__dirname, './data/notes.json'),
+//     JSON.stringify({ notes: result }, null, 2)
+//   );
+//   return remove;
+// }
+
+function deleteNote(id, notesArray) {
+  notesArray.splice(id, 1);
+  fs.writeFileSync(
+    path.join(__dirname, './data/notes.json'),
+    JSON.stringify({ notes: notesArray }, null, 2)
+  );
+  return id;
+}
+
 function validateNote(note) {
   if (!note.title || typeof note.title !== 'string') {
     return false;
@@ -83,7 +103,24 @@ app.post('/api/notes', (req, res) => {
   }
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+  const result = deleteNote(req.params.id, notes);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
+
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
