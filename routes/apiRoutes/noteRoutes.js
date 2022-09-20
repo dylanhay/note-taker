@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-//imports
 const {
   filterByQuery,
   findById,
@@ -8,6 +7,7 @@ const {
   deleteNote,
   validateNote,
 } = require("../../lib/notes");
+
 const { notes } = require("../../data/notes");
 
 //api routes
