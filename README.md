@@ -1,7 +1,7 @@
 # Note Taker
 
 ## Description
-Simple application for writing and saving notes.
+Simple application for writing and saving notes. Web server built with Express.js framework.
 
 ## Table of Contents
 [Deployed Application](#deployed-application)  
