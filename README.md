@@ -31,7 +31,7 @@ https://www.gnu.org/licenses/gpl-3.0
 ## Installation
 To run locally once cloned:
 * Enter `npm install` in the command line while in the root folder to install the required npm packages
-* Enter `npm start` in the command line while in the root folder to launch the application
+* Enter `npm start` in the command line while in the root folder to launch the application at `http://localhost:3001/`
 
 ## Contribution
 Built by Dylan Hay

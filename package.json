@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/dylanhay/note-taker/issues"
   },
-  "homepage": "https://github.com/dylanhay/note-taker#readme"
+  "homepage": "https://github.com/dylanhay/note-taker#readme",
+  "devDependencies": {
+    "firebase-tools": "^11.19.0"
+  }
 }
