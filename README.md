@@ -17,13 +17,16 @@ https://www.gnu.org/licenses/gpl-3.0
 [Contribution](#contribution)  
 
 ## Deployed Application
-
+https://note-taker-dch.cyclic.app/
 
 ## Built With
 * JavaScript
+* Node.js
 * Express.js
 * HTML
 * CSS
+* Git
+* Cyclic
 
 ## Landing Page
 ![Screenshot](./public/assets/images/note-taker-land.png "Landing Page")
