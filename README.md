@@ -33,8 +33,8 @@ https://note-taker-dch.cyclic.app/
 
 ## Installation
 To run locally once cloned:
-* Enter `npm install` in the command line while in the root folder to install the required npm packages
-* Enter `npm start` in the command line while in the root folder to launch the application
+* Enter `npm install` in the CLI to install the required npm packages
+* Enter `npm start` in the CLI to launch the application
 
 ## Contribution
 Built by Dylan Hay
